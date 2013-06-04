@@ -29,8 +29,11 @@
 
   Options:
 
-    -h, --help           output usage information
-    -o, --out <html>     output to the <html> [out.html]
+    -h, --help                 output usage information
+    -t, --template <template>  input <template> file  [index.jade]
+    -p, --path <path>          filename used to resolve includes
+    -j, --json <json>          local <json> file  [local.json]
+    -o, --out <html>           output to the <html> [out.html]
 
 ```
 

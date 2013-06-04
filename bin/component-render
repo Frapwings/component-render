@@ -9,6 +9,9 @@ var program = require('commander');
 
 // parse argv
 program
+  .option('-t, --template <template>', 'input <template> file  [index.jade]')
+  .option('-p, --path <path>', 'filename used to resolve includes')
+  .option('-j, --json <json>', 'local <json> file  [local.json]')
   .option('-o, --out <html>', 'output to the <html> [out.html]', 'out.html')
   .parse(process.argv);
 
