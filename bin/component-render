@@ -1,3 +1,8 @@
 #!/usr/bin/env node
 
-console.log("TODO");
+/*!
+ * import(s)
+ */
+var debug = require('debug')('component-render');
+
+debug("TODO");

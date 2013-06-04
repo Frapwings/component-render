@@ -2,7 +2,12 @@
   "name": "component-render",
   "version": "0.0.1",
   "description": "Render html files from template files for component",
-  "keywords": [ "component", "render", "generator", "html" ],
+  "keywords": [
+    "component",
+    "render",
+    "generator",
+    "html"
+  ],
   "author": "kazupon (kazuya kawaguchi) <k.kawaguchi@frapwings.jp>",
   "repository": {
     "type": "git",
@@ -15,6 +20,7 @@
     "component": "0.16.2"
   },
   "devDependencies": {
+    "debug": "~0.7.2"
   },
   "bin": {
     "component-render": "bin/component-render"
