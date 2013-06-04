@@ -1,0 +1,25 @@
+{
+  "name": "component-render",
+  "version": "0.0.1",
+  "description": "Render html files from template files for component",
+  "keywords": [ "component", "render", "generator", "html" ],
+  "author": "kazupon (kazuya kawaguchi) <k.kawaguchi@frapwings.jp>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Farpwings/component-render.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Frapwings/component-render/issues"
+  },
+  "dependencies": {
+    "component": "0.16.2"
+  },
+  "devDependencies": {
+  },
+  "bin": {
+    "component-render": "bin/component-render"
+  },
+  "engines": {
+    "node": ">= 0.10.0"
+  }
+}
