@@ -4,5 +4,12 @@
  * import(s)
  */
 var debug = require('debug')('component-render');
+var program = require('commander');
 
-debug("TODO");
+
+// parse argv
+program
+  .option('-o, --out <html>', 'output to the <html> [out.html]', 'out.html')
+  .parse(process.argv);
+
+
