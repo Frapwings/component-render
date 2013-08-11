@@ -29,11 +29,13 @@
 
   Options:
 
+    -V, --version              
     -h, --help                 output usage information
-    -t, --template <template>  input <template> file  [index.jade]
-    -p, --path <path>          filename used to resolve includes
-    -j, --json <json>          local <json> file  [local.json]
-    -o, --out <html>           output to the <html> [out.html]
+    -t, --template <template>  target <template> file
+    -p, --path <path>          filename used to resolve <path> includes
+    -l, --local <json>         local <json> file
+    -o, --out <dir>            output the compiled html to <dir>
+    -u, --use <name>           use the given render <name> plugin
 
 ```
 
