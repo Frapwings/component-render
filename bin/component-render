@@ -5,14 +5,22 @@
  */
 var debug = require('debug')('component-render');
 var program = require('commander');
+var fs = require('fs');
 
 
 // parse argv
 program
-  .option('-t, --template <template>', 'input <template> file  [index.jade]')
-  .option('-p, --path <path>', 'filename used to resolve includes')
-  .option('-j, --json <json>', 'local <json> file  [local.json]')
-  .option('-o, --out <html>', 'output to the <html> [out.html]', 'out.html')
+  .version(JSON.parse(fs.readFileSync(__dirname + '/../package.json', 'utf8')).version)
+  .usage('[options]')
+  .option('-t, --template <template>', 'target <template> file')
+  .option('-p, --path <path>', 'filename used to resolve <path> includes')
+  .option('-l, --local <json>', 'local <json> file')
+  .option('-o, --out <dir>', 'output to the cimpiled html to <dir>')
+  .option('-u, --use <name>', 'use the given render <name> plugin')
   .parse(process.argv);
 
+if (!program.args.length) {
+  program.help();
+  process.exit(1);
+}
 

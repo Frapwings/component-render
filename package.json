@@ -17,7 +17,6 @@
     "url": "https://github.com/Frapwings/component-render/issues"
   },
   "dependencies": {
-    "component": "0.16.2",
     "commander": "~1.1.1"
   },
   "devDependencies": {
