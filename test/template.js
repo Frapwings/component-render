@@ -11,7 +11,6 @@ var fs = require('fs');
 var path = require('path');
 
 var TEMPLATE_FIXTURES_DIR = __dirname + '/fixtures/templates';
-var SIMPLE_HTML_PATH = 'bin/simple.html';
 
 
 /*!
@@ -38,38 +37,53 @@ describe('component-render', function () {
     });
   };
 
-  var cleanup = function (done) {
-    if (fs.existsSync(SIMPLE_HTML_PATH)) {
-      fs.unlinkSync(SIMPLE_HTML_PATH);
-    }
-    done();
+  var cleanup = function (path) {
+    return function (done) {
+      if (fs.existsSync(path)) {
+        fs.unlinkSync(path);
+      }
+      done();
+    };
   };
 
-  var commonDescribes = function () {
-    describe('stdout', function () {
-      it('expect to equal ""', function (done) {
-        expect(this.stdout).to.eql('')
-        done();
+  var commonDescribes = function (path, expect_html) {
+    return function () {
+      describe('stdout', function () {
+        it('expect to equal ""', function (done) {
+          expect(this.stdout).to.eql('')
+          done();
+        });
       });
-    });
 
-    describe('stderr', function () {
-      it('expect to equal ""', function (done) {
-        expect(this.stderr).to.eql('')
-        done();
+      describe('stderr', function () {
+        it('expect to equal ""', function (done) {
+          expect(this.stderr).to.eql('')
+          done();
+        });
       });
-    });
 
-    describe('render file', function () {
-      it('expect to contain "<p>hello world</p>"', function (done) {
-        var html = fs.readFileSync(SIMPLE_HTML_PATH).toString();
-        expect(html).to.contain('<p>hello world</p>');
-        done();
+      describe('render file', function () {
+        it(format('expect to contain "%s"', expect_html), function (done) {
+          var html = fs.readFileSync(path).toString();
+          expect(html).to.contain(expect_html);
+          done();
+        });
       });
-    });
+    };
   };
 
 
-  testTemplate('simple template', format('bin/component-render %s', path.join(TEMPLATE_FIXTURES_DIR, 'simple.jade')), commonDescribes, cleanup);
+  testTemplate(
+    'simple template', 
+    format('bin/component-render %s', path.join(TEMPLATE_FIXTURES_DIR, 'simple.jade')), 
+    commonDescribes('bin/simple.html', '<p>hello world</p>'),
+    cleanup('bin/simple.html')
+  );
+  testTemplate(
+    'include template', 
+    format('bin/component-render %s', path.join(TEMPLATE_FIXTURES_DIR, 'include.jade')), 
+    commonDescribes('bin/include.html', '<p>hello world</p>'), 
+    cleanup('bin/include.html')
+  );
 
 }); // end of 'component-render'
