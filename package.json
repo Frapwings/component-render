@@ -17,13 +17,15 @@
     "url": "https://github.com/Frapwings/component-render/issues"
   },
   "dependencies": {
-    "commander": "~1.1.1"
+    "commander": "~1.1.1",
+    "jade": "~0.31.0"
   },
   "devDependencies": {
     "debug": "~0.7.2",
     "mocha": "*",
     "expect.js": "*"
   },
+  "main": "./index.js",
   "bin": {
     "component-render": "bin/component-render"
   },

@@ -6,6 +6,9 @@
 var debug = require('debug')('component-render');
 var program = require('commander');
 var fs = require('fs');
+var path = require('path');
+var format = require('util').format;
+var jade = require('../')
 
 
 // parse argv
@@ -19,8 +22,33 @@ program
   .option('-u, --use <name>', 'use the given render <name> plugin')
   .parse(process.argv);
 
-if (!program.args.length) {
+// check template option
+if (!program.template) {
   program.help();
   process.exit(1);
+  return;
 }
+debug('template option:', program.template);
 
+jade(program.template, program, function (err, html) {
+  if (err) {
+    debug('jade render error', err);
+    process.exit(1);
+    return;
+  }
+  
+  var output = path.join(
+    __dirname,
+    format('%s.html', path.basename(program.template, '.jade'))
+  );
+  debug('output: %s', output);
+  fs.writeFile(output, html, function (err) {
+    if (err) {
+      debug('write file error', err);
+      process.exit(1);
+      return;
+    }
+
+    process.exit(0);
+  });
+});
