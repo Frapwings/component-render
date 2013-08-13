@@ -11,6 +11,7 @@ var fs = require('fs');
 var path = require('path');
 
 var TEMPLATE_FIXTURES_DIR = __dirname + '/fixtures/templates';
+var SIMPLE_HTML_PATH = 'bin/simple.html';
 
 
 /*!
@@ -19,11 +20,11 @@ var TEMPLATE_FIXTURES_DIR = __dirname + '/fixtures/templates';
 
 describe('component-render', function () {
 
-  var testTemplateOption = function (opt, template_path, desc_fn, after_fn) {
-    describe(opt, function () {
-      describe(format('bin/component-render %s %s', opt, template_path), function () {
+  var testTemplate = function (test_desc, cmd, desc_fn, after_fn) {
+    describe(test_desc, function () {
+      describe(cmd, function () {
         before(function (done) {
-          exec(format('bin/component-render %s %s', opt, template_path), function (err, stdout, stderr) {
+          exec(cmd, function (err, stdout, stderr) {
             if (err) { return done(err); }
             this.stdout = stdout;
             this.stderr = stderr;
@@ -37,7 +38,6 @@ describe('component-render', function () {
     });
   };
 
-  var SIMPLE_HTML_PATH = 'bin/simple.html';
   var cleanup = function (done) {
     if (fs.existsSync(SIMPLE_HTML_PATH)) {
       fs.unlinkSync(SIMPLE_HTML_PATH);
@@ -70,7 +70,6 @@ describe('component-render', function () {
   };
 
 
-  testTemplateOption('--template', path.join(TEMPLATE_FIXTURES_DIR, 'simple.jade'), commonDescribes, cleanup);
-  testTemplateOption('-t', path.join(TEMPLATE_FIXTURES_DIR, 'simple.jade'), commonDescribes, cleanup);
+  testTemplate('simple template', format('bin/component-render %s', path.join(TEMPLATE_FIXTURES_DIR, 'simple.jade')), commonDescribes, cleanup);
 
 }); // end of 'component-render'

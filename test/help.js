@@ -28,7 +28,7 @@ describe('component-render', function () {
         });
 
         describe('stdout', function () {
-          it('expect to contain "Usage: component-render [options]"', function (done) {
+          it('expect to contain "Usage: component-render [options] <template>"', function (done) {
             expect(this.stdout).to.contain('Usage: component-render [options]');
             done();
           });
@@ -40,11 +40,6 @@ describe('component-render', function () {
 
           it('expect to contain "-h, --help"', function (done) {
             expect(this.stdout).to.contain('-h, --help');
-            done();
-          });
-
-          it('expect to contain "-t, --template <template>"', function (done) {
-            expect(this.stdout).to.contain('-t, --template <template>');
             done();
           });
 

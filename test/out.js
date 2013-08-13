@@ -23,7 +23,7 @@ describe('component-render', function () {
 
   var testOutOption = function (opt, out_dir, desc_fn, after_fn) {
     describe(opt, function () {
-      var cmd = format('bin/component-render -t %s %s %s', TEMPLATE_FIXTURES_PATH, opt, out_dir);
+      var cmd = format('bin/component-render %s %s %s', opt, out_dir, TEMPLATE_FIXTURES_PATH);
       describe(cmd, function () {
         before(function (done) {
           exec(cmd, function (err, stdout, stderr) {

@@ -14,8 +14,7 @@ var jade = require('../')
 // parse argv
 program
   .version(JSON.parse(fs.readFileSync(__dirname + '/../package.json', 'utf8')).version)
-  .usage('[options]')
-  .option('-t, --template <template>', 'target <template> file')
+  .usage('[options] <template>')
   .option('-p, --path <path>', 'filename used to resolve <path> includes')
   .option('-l, --local <json>', 'local <json> file')
   .option('-o, --out <dir>', 'output to the cimpiled html to <dir>')
@@ -23,14 +22,14 @@ program
   .parse(process.argv);
 
 // check template option
-if (!program.template) {
+if (program.args.length === 0) {
   program.help();
   process.exit(1);
   return;
 }
-debug('template option:', program.template);
 
-jade(program, function (err, html) {
+var template = program.args[0];
+jade(template, program, function (err, html) {
   if (err) {
     debug('jade render error', err);
     process.exit(1);
@@ -47,7 +46,7 @@ jade(program, function (err, html) {
 
   var out_path = path.join(
     out_dir,
-    format('%s.html', path.basename(program.template, '.jade'))
+    format('%s.html', path.basename(template, '.jade'))
   );
   debug('out_path: %s', out_path);
   fs.writeFile(out_path, html, function (err) {

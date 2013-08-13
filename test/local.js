@@ -22,7 +22,7 @@ describe('component-render', function () {
 
   var testLocalOption = function (opt, local_path, desc_fn, after_fn) {
     describe(opt, function () {
-      var cmd = format('bin/component-render -t %s %s %s', TEMPLATE_FIXTURES_PATH, opt, local_path);
+      var cmd = format('bin/component-render %s %s %s', opt, local_path, TEMPLATE_FIXTURES_PATH);
       describe(cmd, function () {
         before(function (done) {
           exec(cmd, function (err, stdout, stderr) {
