@@ -37,12 +37,20 @@ jade(program.template, program, function (err, html) {
     return;
   }
   
-  var output = path.join(
-    __dirname,
+  var out_dir = __dirname;
+  if (program.out) {
+    if (!fs.existsSync(program.out)) {
+      fs.mkdirSync(program.out);
+    }
+    out_dir = program.out;
+  }
+
+  var out_path = path.join(
+    out_dir,
     format('%s.html', path.basename(program.template, '.jade'))
   );
-  debug('output: %s', output);
-  fs.writeFile(output, html, function (err) {
+  debug('out_path: %s', out_path);
+  fs.writeFile(out_path, html, function (err) {
     if (err) {
       debug('write file error', err);
       process.exit(1);
