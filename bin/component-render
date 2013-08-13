@@ -30,7 +30,7 @@ if (!program.template) {
 }
 debug('template option:', program.template);
 
-jade(program.template, program, function (err, html) {
+jade(program, function (err, html) {
   if (err) {
     debug('jade render error', err);
     process.exit(1);
