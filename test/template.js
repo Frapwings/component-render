@@ -37,9 +37,15 @@ describe('component-render', function () {
     });
   };
 
-
   var SIMPLE_HTML_PATH = 'bin/simple.html';
-  testTemplateOption('--template', path.join(TEMPLATE_FIXTURES_DIR, 'simple.jade'), function () {
+  var cleanup = function (done) {
+    if (fs.existsSync(SIMPLE_HTML_PATH)) {
+      fs.unlinkSync(SIMPLE_HTML_PATH);
+    }
+    done();
+  };
+
+  var commonDescribes = function () {
     describe('stdout', function () {
       it('expect to equal ""', function (done) {
         expect(this.stdout).to.eql('')
@@ -61,13 +67,10 @@ describe('component-render', function () {
         done();
       });
     });
-  }, function (done) {
-    if (fs.existsSync(SIMPLE_HTML_PATH)) {
-      fs.unlinkSync(SIMPLE_HTML_PATH);
-    }
-    done();
-  });
+  };
 
-  //testTemplateOptionOption('-t');
+
+  testTemplateOption('--template', path.join(TEMPLATE_FIXTURES_DIR, 'simple.jade'), commonDescribes, cleanup);
+  testTemplateOption('-t', path.join(TEMPLATE_FIXTURES_DIR, 'simple.jade'), commonDescribes, cleanup);
 
 }); // end of 'component-render'
