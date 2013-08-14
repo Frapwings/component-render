@@ -1,6 +1,6 @@
 {
   "name": "component-render",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Render html files from template files for component",
   "keywords": [
     "component",
@@ -28,6 +28,9 @@
   "main": "./index.js",
   "bin": {
     "component-render": "bin/component-render"
+  },
+  "scripts": {
+    "test": "make test"
   },
   "engines": {
     "node": ">= 0.10.0"

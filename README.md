@@ -13,35 +13,43 @@
 ```
 
 
-## Support templates
-
-- jade
-
-
-## Example
-
-
 ## Usage
 
 ```
 
-  Usage: component-render [options]
+  Usage: component-render [options] <template>
 
   Options:
 
     -V, --version              
     -h, --help                 output usage information
-    -t, --template <template>  target <template> file
-    -p, --path <path>          filename used to resolve <path> includes
     -l, --local <json>         local <json> file
     -o, --out <dir>            output the compiled html to <dir>
-    -u, --use <name>           use the given render <name> plugin
 
 ```
 
+
+## Example
+
+```
+    # redner html file from template file
+    $ component render simple.jade
+
+    # render html file from template file with local json file
+    $ component render -l user.json user.jade
+
+    # render html file to output directory path
+    $ component render -o ./render simple.jade
+
+```
+
+## template engine
+Support `Jade` template engine. `Hogan`, `EJS`, and other template engine, you can support with plugin.
+
+
 ## TODO
 
-- Other template support
+- `-u`, `--use` option
 
 
 ## License
