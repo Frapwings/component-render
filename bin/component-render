@@ -15,7 +15,6 @@ var jade = require('../')
 program
   .version(JSON.parse(fs.readFileSync(__dirname + '/../package.json', 'utf8')).version)
   .usage('[options] <template>')
-  .option('-p, --path <path>', 'filename used to resolve <path> includes')
   .option('-l, --local <json>', 'local <json> file')
   .option('-o, --out <dir>', 'output to the cimpiled html to <dir>')
   .option('-u, --use <name>', 'use the given render <name> plugin')

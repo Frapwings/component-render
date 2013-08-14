@@ -43,11 +43,6 @@ describe('component-render', function () {
             done();
           });
 
-          it('expect to contain "-p, --path <path>"', function (done) {
-            expect(this.stdout).to.contain('-p, --path <path>');
-            done();
-          });
-
           it('expect to contain "-l, --local <json>"', function (done) {
             expect(this.stdout).to.contain('-l, --local <json>');
             done();
