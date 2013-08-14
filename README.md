@@ -1,12 +1,14 @@
 # component-render
 
-  Render html files from template files for component
+[![Build Status](https://travis-ci.org/Frapwings/component-render.png?branch=master)](https://travis-ci.org/Frapwings/component-render)
+
+Render html files from template files for component
 
 
 
 ## Installation
 
-  With [Component](http://github.com/component/component) previously installed:
+With [Component](http://github.com/component/component) previously installed:
 
 ```
     $ npm install -g component-render
