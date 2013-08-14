@@ -1,6 +1,6 @@
 {
   "name": "component-render",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Render html files from template files for component",
   "keywords": [
     "component",
@@ -18,10 +18,10 @@
   },
   "dependencies": {
     "commander": "~1.1.1",
-    "jade": "~0.31.0"
+    "jade": "~0.31.0",
+    "debug": "~0.7.2"
   },
   "devDependencies": {
-    "debug": "~0.7.2",
     "mocha": "*",
     "expect.js": "*"
   },

@@ -76,14 +76,14 @@ describe('component-render', function () {
   testTemplate(
     'simple template', 
     format('bin/component-render %s', path.join(TEMPLATE_FIXTURES_DIR, 'simple.jade')), 
-    commonDescribes('bin/simple.html', '<p>hello world</p>'),
-    cleanup('bin/simple.html')
+    commonDescribes('simple.html', '<p>hello world</p>'),
+    cleanup('simple.html')
   );
   testTemplate(
     'include template', 
     format('bin/component-render %s', path.join(TEMPLATE_FIXTURES_DIR, 'include.jade')), 
-    commonDescribes('bin/include.html', '<p>hello world</p>'), 
-    cleanup('bin/include.html')
+    commonDescribes('include.html', '<p>hello world</p>'), 
+    cleanup('include.html')
   );
 
 }); // end of 'component-render'

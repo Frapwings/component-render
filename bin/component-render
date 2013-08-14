@@ -35,7 +35,7 @@ jade(template, program, function (err, html) {
     return;
   }
   
-  var out_dir = __dirname;
+  var out_dir = process.cwd();
   if (program.out) {
     if (!fs.existsSync(program.out)) {
       fs.mkdirSync(program.out);

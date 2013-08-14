@@ -11,8 +11,8 @@ var fs = require('fs');
 var path = require('path');
 
 var TEMPLATE_FIXTURES_PATH = __dirname + '/fixtures/templates/simple.jade';
-var GENERATE_DIR = __dirname + '/fixtures/templates';
-var GENERATE_HTML_PATH = __dirname + '/fixtures/templates/simple.html';
+var GENERATE_DIR = __dirname + '/fixtures';
+var GENERATE_HTML_PATH = __dirname + '/fixtures/simple.html';
 
 
 /*!

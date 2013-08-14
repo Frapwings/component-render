@@ -10,7 +10,7 @@ var format = require('util').format;
 var fs = require('fs');
 
 var TEMPLATE_FIXTURES_PATH = __dirname + '/fixtures/templates/user.jade';
-var GENERATE_HTML_PATH = 'bin/user.html';
+var GENERATE_HTML_PATH = 'user.html';
 var LOCAL_PATH = __dirname + '/fixtures/user.json';
 
 
