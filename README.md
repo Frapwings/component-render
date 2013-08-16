@@ -27,6 +27,7 @@ With [Component](http://github.com/component/component) previously installed:
     -h, --help                 output usage information
     -l, --local <json>         local <json> file
     -o, --out <dir>            output the compiled html to <dir>
+    -u, --use <name>           use the given render <name> plugin
 
 ```
 
@@ -43,15 +44,13 @@ With [Component](http://github.com/component/component) previously installed:
     # render html file to output directory path
     $ component render -o ./render simple.jade
 
+    # render html file with plugin
+    $ component render -u component-render-hogan -l user.json user.mustache
+
 ```
 
-## template engine
+## Template engine
 Support `Jade` template engine. `Hogan`, `EJS`, and other template engine, you can support with plugin.
-
-
-## TODO
-
-- `-u`, `--use` option
 
 
 ## License

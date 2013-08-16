@@ -8,7 +8,34 @@ var program = require('commander');
 var fs = require('fs');
 var path = require('path');
 var format = require('util').format;
-var jade = require('../')
+
+
+var loadRenderer = function (plugin) {
+  var renderer;
+  var resolve_path = path.resolve(plugin);
+  var exists = fs.existsSync(resolve_path) || fs.existsSync(resolve_path + '.js');
+  debug('resolve_path = %s, exists = %s', resolve_path, exists);
+
+  if (exists) {
+    renderer = require(resolve_path);
+  } else {
+    try {
+      renderer = require(plugin);
+    } catch (e) {
+      debug('global plugin load error');
+
+      var module_path = path.resolve('node_modules', plugin);
+      debug('module_path', module_path);
+      try {
+        renderer = require(module_path);
+      } catch (e) {
+        debug('local plugin load error');
+      }
+    }
+  }
+
+  return renderer;
+};
 
 
 // parse argv
@@ -27,10 +54,16 @@ if (program.args.length === 0) {
   return;
 }
 
+// check use option
+var renderer = require('../'); // default 'jade'
+if (program.use) {
+  renderer = loadRenderer(program.use);
+}
+
 var template = program.args[0];
-jade(template, program, function (err, html) {
+renderer(template, program, function (err, html) {
   if (err) {
-    debug('jade render error', err);
+    debug('renderer error', err);
     process.exit(1);
     return;
   }
@@ -45,7 +78,7 @@ jade(template, program, function (err, html) {
 
   var out_path = path.join(
     out_dir,
-    format('%s.html', path.basename(template, '.jade'))
+    format('%s.html', path.basename(template, path.extname(template)))
   );
   debug('out_path: %s', out_path);
   fs.writeFile(out_path, html, function (err) {
