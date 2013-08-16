@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/Frapwings/component-render.png?branch=master)](https://travis-ci.org/Frapwings/component-render)
 
-Render html files from template files for component
+Render html file from template file for component
 
 
 
@@ -27,6 +27,7 @@ With [Component](http://github.com/component/component) previously installed:
     -h, --help                 output usage information
     -l, --local <json>         local <json> file
     -o, --out <dir>            output the compiled html to <dir>
+    -u, --use <name>           use the given render <name> plugin
 
 ```
 
@@ -43,15 +44,45 @@ With [Component](http://github.com/component/component) previously installed:
     # render html file to output directory path
     $ component render -o ./render simple.jade
 
+    # render html file with plugin
+    $ component render -u component-render-hogan -l user.json user.mustache
+
 ```
 
-## template engine
+## Template engine
 Support `Jade` template engine. `Hogan`, `EJS`, and other template engine, you can support with plugin.
 
 
-## TODO
+## How to create plugin
+You need to implement below function.
 
-- `-u`, `--use` option
+- Function have `template`, `program` and `fn` arugments.
+- `template`: a template file path.
+- `program`: `commander` object.
+- `fn`: a callback function. specify `error`, `html` to arguments.
+
+### Plugin example
+```javascript
+
+var hogan = require('hogan.js');
+var path = require('path');
+var fs = require('fs');
+
+module.exports = function (template, program, fn) {
+  var local = {};
+  if (program.local) {
+    var resolve_path = path.resolve(program.local);
+    local = fs.existsSync(resolve_path) ? require(resolve_path) : require(resolve_path + '.json');
+  }
+  fs.readFile(template, { encoding: 'utf8' }, function (err, data) {
+    if (err) { return fn(err); }
+    var renderer = hogan.compile(data);
+    var html = renderer.render(local);
+    fn(null, html);
+  });
+};
+
+```
 
 
 ## License
