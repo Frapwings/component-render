@@ -11,8 +11,8 @@ var fs = require('fs');
 var path = require('path');
 
 var TEMPLATE_FIXTURES_PATH = __dirname + '/fixtures/templates/simple.jade';
-var GENERATE_DIR = __dirname + '/fixtures';
-var GENERATE_HTML_PATH = __dirname + '/fixtures/simple.html';
+var GENERATE_DIR = __dirname + '/fixtures/static/html';
+var GENERATE_HTML_PATH = __dirname + '/fixtures/static/html/simple.html';
 
 
 /*!
@@ -41,8 +41,9 @@ describe('component-render', function () {
   };
 
   var cleanup = function (done) {
-    if (fs.existsSync(GENERATE_HTML_PATH)) {
+    if (fs.existsSync(GENERATE_DIR)) {
       fs.unlinkSync(GENERATE_HTML_PATH);
+      fs.rmdirSync(GENERATE_DIR);
     }
     done();
   };
@@ -72,8 +73,8 @@ describe('component-render', function () {
   };
 
 
-  testOutOption('--out', GENERATE_DIR, commonDescribes, cleanup);
-  testOutOption('-o', GENERATE_DIR, commonDescribes, cleanup);
+  testOutOption('--out', GENERATE_HTML_PATH, commonDescribes, cleanup);
+  testOutOption('-o', GENERATE_HTML_PATH, commonDescribes, cleanup);
 
 
 }); // end of 'component-render'

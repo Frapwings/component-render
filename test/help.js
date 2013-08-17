@@ -48,8 +48,8 @@ describe('component-render', function () {
             done();
           });
 
-          it('expect to contain "-o, --out <dir>"', function (done) {
-            expect(this.stdout).to.contain('-o, --out <dir>');
+          it('expect to contain "-o, --out <path>"', function (done) {
+            expect(this.stdout).to.contain('-o, --out <path>');
             done();
           });
 
