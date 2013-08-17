@@ -6,6 +6,7 @@
 var debug = require('debug')('component-render');
 var program = require('commander');
 var fs = require('fs');
+var mkdir = require('mkdirp').sync;
 var path = require('path');
 var format = require('util').format;
 
@@ -43,7 +44,7 @@ program
   .version(JSON.parse(fs.readFileSync(__dirname + '/../package.json', 'utf8')).version)
   .usage('[options] <template>')
   .option('-l, --local <json>', 'local <json> file')
-  .option('-o, --out <dir>', 'output to the cimpiled html to <dir>')
+  .option('-o, --out <path>', 'output html file <path>')
   .option('-u, --use <name>', 'use the given render <name> plugin')
   .parse(process.argv);
 
@@ -69,18 +70,17 @@ renderer(template, program, function (err, html) {
   }
   
   var out_dir = process.cwd();
-  if (program.out) {
-    if (!fs.existsSync(program.out)) {
-      fs.mkdirSync(program.out);
-    }
-    out_dir = program.out;
-  }
-
   var out_path = path.join(
     out_dir,
     format('%s.html', path.basename(template, path.extname(template)))
   );
+  if (program.out) {
+    out_dir = path.dirname(program.out);
+    mkdir(out_dir);
+    out_path = program.out;
+  }
   debug('out_path: %s', out_path);
+
   fs.writeFile(out_path, html, function (err) {
     if (err) {
       debug('write file error', err);
